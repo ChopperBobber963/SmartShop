@@ -1,0 +1,36 @@
+﻿@model AddProductForm
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<div class = "row">
+    <div class = "col-6 offset-3">
+        <h2 class="heading-margin text-center">Add Product</h2>
+        <form method = "post">
+  <div class="form-group">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" class="form-control" placeholder="PS4, Xbox One">
+  </div>
+  <div class="form-group">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" class="form-control" placeholder="Best game ever !!">
+        </textarea>
+  </div>
+  <div class="form-group">
+    <label asp-for="PictureURL"></label>
+    <input asp-for="PictureURL" class="form-control" placeholder="Picture URL">
+  </div>
+  <div class="form-group">
+    <label asp-for="Price"></label>
+    <input asp-for="Price" class="form-control" placeholder="$25.99">
+  </div>
+  <div class="form-group">
+    <label asp-for="ProductTypeId"></label>
+    <select asp-for="ProductTypeId" class ="form-control">
+                    @foreach(var types in Model.ProductTypes)
+                    {
+                        <option value="@types.Id">@types.Name</option>
+                    }
+                </select>
+  </div>
+</form>
