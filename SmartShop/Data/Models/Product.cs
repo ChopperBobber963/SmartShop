@@ -19,9 +19,8 @@ namespace SmartShop.Data.Models
         [Required]
         public double Price { get; set; }
 
-        public bool IsAvailable { get; set; }
-
-        [MaxLength(PictureUrlMaxLength)]
+        
+        [Required]
         public string PictureURL { get; set; }
 
         public int ProductTypeId { get; set; }

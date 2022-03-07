@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartShop.Data;
+using SmartShop.Data.Models;
 using SmartShop.Models.Product;
 
 namespace SmartShop.Controllers
@@ -23,7 +24,31 @@ namespace SmartShop.Controllers
         [HttpPost]
         public IActionResult Add(AddProductForm product)
         {
-            return View();
+            if (dbContext.ProductTypes.Any(pt => pt.Id == product.ProductTypeId))
+            {
+                ModelState.AddModelError(nameof(product.ProductTypeId), "Product Type is nonexistent");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                product.ProductTypes = GetProductTypes();
+                return View(product);
+            }
+
+            var productData = new Product
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                PictureURL = product.PictureURL,
+                ProductTypeId = product.ProductTypeId
+            };
+
+            dbContext.Products.Add(productData); 
+            dbContext.SaveChanges();
+
+
+            return View("Index", "Home");
         }
 
         private IEnumerable<ProductTypeViewModel> GetProductTypes()

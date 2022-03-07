@@ -6,12 +6,12 @@ using SmartShop.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("Server = (LocalDb)\\MSSQLLocalDB; Database = aspnet - SmartShop - E02F4E10 - 871C - 4A59 - AFB2 - DC5CC82E4DB6; Trusted_Connection = True; MultipleActiveResultSets = true");
 builder.Services.AddDbContext<SmartShopDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer("Server = (LocalDb)\\MSSQLLocalDB; Database = aspnet - SmartShop - E02F4E10 - 871C - 4A59 - AFB2 - DC5CC82E4DB6; Trusted_Connection = True; MultipleActiveResultSets = true"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<SmartShopDbContext>();
 builder.Services.AddControllersWithViews();
 
