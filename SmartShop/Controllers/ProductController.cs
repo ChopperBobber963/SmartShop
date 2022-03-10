@@ -24,7 +24,7 @@ namespace SmartShop.Controllers
         [HttpPost]
         public IActionResult Add(AddProductForm product)
         {
-            if (dbContext.ProductTypes.Any(pt => pt.Id == product.ProductTypeId))
+            if (!this.dbContext.ProductTypes.Any(pt => pt.Id == product.ProductTypeId))
             {
                 ModelState.AddModelError(nameof(product.ProductTypeId), "Product Type is nonexistent");
             }
@@ -48,7 +48,7 @@ namespace SmartShop.Controllers
             dbContext.SaveChanges();
 
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         private IEnumerable<ProductTypeViewModel> GetProductTypes()

@@ -7,9 +7,9 @@ namespace SmartShop.Infrastructure
 {
     public static class Builder
     {
-       public static IApplicationBuilder PrepDb(this IApplicationBuilder app)
+       public static WebApplication PrepDb(this WebApplication app)
        {
-            using var scopedServices = app.ApplicationServices.CreateScope();
+            using var scopedServices = app.Services.CreateScope();
 
             var data = scopedServices.ServiceProvider.GetService<SmartShopDbContext>();
 

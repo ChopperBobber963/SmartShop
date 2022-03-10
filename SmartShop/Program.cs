@@ -6,9 +6,9 @@ using SmartShop.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("Server = (LocalDb)\\MSSQLLocalDB; Database = aspnet - SmartShop - E02F4E10 - 871C - 4A59 - AFB2 - DC5CC82E4DB6; Trusted_Connection = True; MultipleActiveResultSets = true");
+var connectionString = builder.Configuration.GetConnectionString("Server = (LocalDb)\\MSSQLLocalDB; D   atabase = aspnet - SmartShop - E02F4E10 - 871C - 4A59 - AFB2 - DC5CC82E4DB6; Trusted_Connection = True; MultipleActiveResultSets = true");
 builder.Services.AddDbContext<SmartShopDbContext>(options =>
-    options.UseSqlServer("Server = (LocalDb)\\MSSQLLocalDB; Database = aspnet - SmartShop - E02F4E10 - 871C - 4A59 - AFB2 - DC5CC82E4DB6; Trusted_Connection = True; MultipleActiveResultSets = true"));
+    options.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=SmartShop;Integrated Security = true;"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -16,7 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
+app.PrepDb();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -31,7 +31,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.PrepDb();
+
 app.UseRouting();
 
 app.UseAuthentication();

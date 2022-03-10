@@ -28,6 +28,6 @@ namespace SmartShop.Models.Product
         [Display(Name = "Product Type")]
         public int ProductTypeId { get; set; }
 
-        public IEnumerable<ProductTypeViewModel> ProductTypes { get; set; }
+        public IEnumerable<ProductTypeViewModel> ProductTypes { get; set; } = new List<ProductTypeViewModel>();
     }
 }
