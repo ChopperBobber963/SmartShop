@@ -34,7 +34,9 @@ namespace SmartShop.Infrastructure
                 new ProductType{Name = "Smartphones"},
                 new ProductType{Name = "Laptops"},
                 new ProductType{Name = "Headphones"},
-                new ProductType{Name = "TVs"}
+                new ProductType{Name = "TVs"},
+                new ProductType{Name = "Movies and TV"},
+                new ProductType{Name = "Music"}
             });
             data.SaveChanges();
         }

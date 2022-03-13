@@ -51,6 +51,25 @@ namespace SmartShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult AllProducts()
+        {
+            var products = this.dbContext
+                .Products
+                .OrderByDescending(pt => pt.Id)
+                .Select(p => new ProductListingViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description= p.Description,
+                    Price = p.Price,
+                    PictureURL = p.PictureURL,
+                    ProductType = p.ProductType.Name
+                })
+                .ToList();
+            return View(products);
+        }
+
+
         private IEnumerable<ProductTypeViewModel> GetProductTypes()
          =>
                 dbContext.ProductTypes

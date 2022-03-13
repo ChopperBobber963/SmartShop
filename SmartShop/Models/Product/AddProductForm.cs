@@ -17,7 +17,7 @@ namespace SmartShop.Models.Product
         public string Description { get; set; }
 
         [Required]
-        [Range(0, double.MaxValue,ErrorMessage = "{0} must be between {1} and {2}")]
+        [Range(0,double.MaxValue, ErrorMessage = "{0} is required and cannot be null")]
         public double Price { get; set; }
 
         [Url]

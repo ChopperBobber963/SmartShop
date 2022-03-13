@@ -6,7 +6,7 @@
         public const int ProductNameMinLength = 2;
 
         public const int ProductDescriptionMaxLength = 200;
-        public const int ProductDescriptionMinLength = 10;
+        public const int ProductDescriptionMinLength = 5;
         
     }
 }
