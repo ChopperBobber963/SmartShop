@@ -61,6 +61,8 @@ namespace SmartShop.Controllers
                 p.Name.ToLower().Contains(search.ToLower()));
             }
 
+           
+
             var products = productsQuery
                 .OrderByDescending(pt => pt.Id)
                 .Select(p => new ProductListingViewModel

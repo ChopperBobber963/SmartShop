@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using SmartShop.Data;
 using SmartShop.Infrastructure;
 
@@ -14,6 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<SmartShopDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication()
+    .AddFacebook(options =>
+    {
+        options.AppId = "291233079790152";
+        options.AppSecret = "eb2db14c8c4931f44759ed94ce62cc39";
+    });
 
 var app = builder.Build();
 app.PrepDb();
