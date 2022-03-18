@@ -48,13 +48,20 @@ namespace SmartShop.Controllers
             dbContext.SaveChanges();
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(AllProducts));
         }
 
-        public IActionResult AllProducts()
+        public IActionResult AllProducts(string search)
         {
-            var products = this.dbContext
-                .Products
+            var productsQuery = dbContext.Products.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                productsQuery = productsQuery.Where(p =>
+                p.Name.ToLower().Contains(search.ToLower()));
+            }
+
+            var products = productsQuery
                 .OrderByDescending(pt => pt.Id)
                 .Select(p => new ProductListingViewModel
                 {
@@ -66,7 +73,12 @@ namespace SmartShop.Controllers
                     ProductType = p.ProductType.Name
                 })
                 .ToList();
-            return View(products);
+
+            return View(new AllProductsViewModel
+            {
+                Products = products,
+                Search = search
+            });
         }
 
 

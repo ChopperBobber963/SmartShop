@@ -1,15 +1,25 @@
-﻿@model IEnumerable<ProductListingViewModel>
+﻿@model AllProductsViewModel
+
+<form method = "get">
+    <div class = "row mb-5">
+        <div class = "form-group col-md-4">
+             <label asp-for="Search"></label>
+             <input asp-for="Search" class="form-control" placeholder="PS4, Xbox One">
+        </div>
+    </div>
+</form>
+
 
 <div class = "row">
-    @foreach(var product in Model)
+  @foreach(var product in Model.Products)
   {
     <div class="card" style="width: 18rem;">
-  <img src="@product.PictureURL" class="card-img-top" alt="@product.Name - @product.Price (@product.ProductType")>
-  <div class="card-body">
-    <h5 class="card-title">@product.Name</h5>
+    <img src="@product.PictureURL" class="card-img-top" alt="@product.Name - @product.Price (@product.ProductType")>
+    <div class="card-body text-center">
+    <h5 class="card-title text-center">@product.Name</h5>
     <p class="card-text">@product.Description</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-   </div>
+    <a asp-controller="Product" asp-action= "Details" asp-route-id =@product.Id class="btn btn-primary">$@product.Price</a>
+    </div>
+    </div>
   }
 </div>

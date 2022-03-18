@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartShop.Data;
 using SmartShop.Models;
+using SmartShop.Models.Product;
 using System.Diagnostics;
 
 namespace SmartShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly SmartShopDbContext dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SmartShopDbContext dbContext)
         {
-            _logger = logger;
+            this.dbContext = dbContext;
         }
+
+        
 
         public IActionResult Index()
         {
