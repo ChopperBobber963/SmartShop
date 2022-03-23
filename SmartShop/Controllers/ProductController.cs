@@ -94,5 +94,36 @@ namespace SmartShop.Controllers
                 })
                 .ToList();
         
+        public IActionResult Edit (int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = dbContext.Products.Where(p => p.Id == id).FirstOrDefault();
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product prod)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(prod);
+            }
+
+            
+            dbContext.Products.Update(prod);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
